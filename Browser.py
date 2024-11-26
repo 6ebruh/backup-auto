@@ -1,4 +1,5 @@
 from selenium import webdriver
+import time
 from selenium.webdriver.common.by import By
 
 class Browser():
@@ -18,9 +19,11 @@ class Browser():
     def get_element(self, locator):
         return self.driver.find_element(By.XPATH, locator)
 
-    def login_in_owa(self, login_label, login, password_label, password):
+    def login_in_owa(self, login_label, login, password_label, password, enter_button):
         self.get_element(login_label).send_keys(login)
         self.get_element(password_label).send_keys(password)
+        self.get_element(enter_button).click()
 
-    def logout_from_owa():
-        pass
+    def logout_from_owa(self, profile_button, exit_button):
+        self.get_element(profile_button).click()
+        self.get_element(exit_button).click()
