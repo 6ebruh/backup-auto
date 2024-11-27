@@ -19,11 +19,17 @@ class Browser():
     def get_element(self, locator):
         return self.driver.find_element(By.XPATH, locator)
 
+    def action_click(self, element):
+        self.get_element(element).click()
+
+    def action_send_keys(self, element, key):
+        self.get_element(element).send_keys(key)
+
     def login_in_owa(self, login_label, login, password_label, password, enter_button):
-        self.get_element(login_label).send_keys(login)
-        self.get_element(password_label).send_keys(password)
-        self.get_element(enter_button).click()
+        self.action_send_keys(login_label, login)
+        self.action_send_keys(password_label, password)
+        self.action_click(enter_button)
 
     def logout_from_owa(self, profile_button, exit_button):
-        self.get_element(profile_button).click()
-        self.get_element(exit_button).click()
+        self.action_click(profile_button)
+        self.action_click(exit_button)
