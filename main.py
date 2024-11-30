@@ -1,4 +1,5 @@
 import time
+from datetime import date
 import config as cfg, Browser
 
 #обьект браузера

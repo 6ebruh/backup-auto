@@ -33,3 +33,7 @@ class Browser():
     def logout_from_owa(self, profile_button, exit_button):
         self.action_click(profile_button)
         self.action_click(exit_button)
+
+    def take_screenshot(self, filename):
+        screenshot_path = filename
+        self.driver.save_screenshot(screenshot_path)
