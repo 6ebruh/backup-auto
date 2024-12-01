@@ -19,6 +19,10 @@ try:
 
     time.sleep(3)
 
+    browser.take_screenshot(f'screenshots/screenshot_{date.today()}.png')
+
+    time.sleep(3)
+
     browser.logout_from_owa(cfg.profile_button, cfg.exit_button)
     time.sleep(10)
     browser.open_link(cfg.urls['backup'])
