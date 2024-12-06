@@ -3,3 +3,4 @@ venv
 __pycache__
 screenshots
 table_backuppc.html
+parser.py
