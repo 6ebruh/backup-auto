@@ -1,4 +1,5 @@
 import time
+from datetime import date
 import config as cfg, Browser
 
 #обьект браузера
@@ -6,22 +7,27 @@ browser = Browser.Browser()
 
 try:
     browser.open_link(cfg.urls['mail'])
-    time.sleep(5)
-    browser.login_in_owa(cfg.login_label,
-                         cfg.login,
-                         cfg.password_label,
-                         cfg.password,
-                         cfg.enter_button)
-    time.sleep(10)
+    # browser.login_in_owa(cfg.login_label,
+    #                      cfg.login,
+    #                      cfg.password_label,
+    #                      cfg.password,
+    #                      cfg.enter_button)
+
+    browser.login_in_mail(cfg.mail_login,
+                          cfg.mail_password,
+                          cfg.mail_enter,
+                          cfg.mail_login_input,
+                          cfg.mail_enter_button,
+                          cfg.skip_button,
+                          cfg.mail_password_input,
+                          cfg.mail_login_frame)
 
     browser.action_click(cfg.mail_folder)
 
-    time.sleep(3)
+    #доделать и отослалть еще письма
+    # browser.action_click(cfg.mail_first_letter)
 
-    browser.logout_from_owa(cfg.profile_button, cfg.exit_button)
-    time.sleep(10)
-    browser.open_link(cfg.urls['backup'])
-    time.sleep(2)
+    browser.logout_from_mail(cfg.mail_profile_button, cfg.mail_exit_button)
 finally:
     browser.close_browser()
 
