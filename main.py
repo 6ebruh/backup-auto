@@ -2,6 +2,15 @@ import time
 from datetime import date
 import config as cfg, Browser
 
+
+# zni = input("""
+# 1. Сотрудник1
+# 2. Сотрудник2
+# 3. Сотрудник3
+# Введите номер сотрудника, выполняиющего РР РК
+# """)
+
+
 #обьект браузера
 browser = Browser.Browser()
 
