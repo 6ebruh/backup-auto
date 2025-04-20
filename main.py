@@ -1,6 +1,6 @@
 import time
 from datetime import date
-import config as cfg, Browser
+import config as cfg, Browser, page
 
 
 # zni = input("""
@@ -24,19 +24,19 @@ try:
 
     browser.login_in_mail(cfg.mail_login,
                           cfg.mail_password,
-                          cfg.mail_enter,
-                          cfg.mail_login_input,
-                          cfg.mail_enter_button,
-                          cfg.skip_button,
-                          cfg.mail_password_input,
-                          cfg.mail_login_frame)
+                          page.mail_enter,
+                          page.mail_login_input,
+                          page.mail_enter_button,
+                          page.skip_button,
+                          page.mail_password_input,
+                          page.mail_login_frame)
 
-    browser.action_click(cfg.mail_folder)
+    browser.action_click(page.mail_folder)
 
     #доделать и отослалть еще письма
     # browser.action_click(cfg.mail_first_letter)
 
-    browser.logout_from_mail(cfg.mail_profile_button, cfg.mail_exit_button)
+    browser.logout_from_mail(page.mail_profile_button, page.mail_exit_button)
 finally:
     browser.close_browser()
 
