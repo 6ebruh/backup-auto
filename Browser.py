@@ -1,5 +1,6 @@
 from selenium import webdriver
 import time
+import page
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,6 +10,7 @@ class Browser():
 
     def __init__(self):
         self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         self.chrome_options.add_argument("--incognito")
         self.driver = webdriver.Chrome(self.chrome_options)
         self.driver.maximize_window()
@@ -52,11 +54,35 @@ class Browser():
     def switch_to_frame(self, frame_xpath):
         return self.driver.switch_to.frame(self.wait_visible(frame_xpath))
 
-    def login_in_mail(self, mail_login, mail_password, mail_enter, mail_login_input, mail_enter_button, skip_button, mail_password_input, mail_login_frame):
-        self.action_click(mail_enter)
-        self.switch_to_frame(mail_login_frame)
-        self.action_send_keys(mail_login_input, mail_login)
-        self.action_click(mail_enter_button)
-        self.action_click(skip_button)
-        self.action_send_keys(mail_password_input, mail_password)
-        self.action_click(mail_enter_button)
+    def switch_to_default(self):
+        return self.driver.switch_to.default_content()
+
+    def login_mail(self, mail_login, mail_password):
+        self.action_click(page.mail_enter_button)
+        time.sleep(2)
+        self.switch_to_frame(page.mail_enter_frame)
+        time.sleep(2)
+        self.action_send_keys(page.mail_login_input, mail_login)
+        time.sleep(2)
+        self.action_click(page.mail_logpass_button)
+        time.sleep(2)
+        self.action_send_keys(page.mail_password_input, mail_password)
+        self.action_click(page.mail_logpass_button)
+        time.sleep(2)
+        self.switch_to_default()
+
+    def logout_mail(self):
+        self.action_click(page.profile_icon)
+        self.action_click(page.mexit_button)
+
+
+    def login_gmail(self, login, password):
+        self.action_send_keys(page.gmail_login_input, login)
+        self.action_click(page.gmail_next_login_button)
+        self.action_send_keys(page.gmail_password_input, password)
+        self.action_click(page.gmail_next_password_button)
+
+    def logout_gmail(self):
+        self.action_click(page.gmail_profile_logo)
+        self.switch_to_frame(page.gmail_logout_frame)
+        self.action_click(page.gmail_logout_button)
