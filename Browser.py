@@ -24,19 +24,20 @@ class Browser():
     def get_element(self, locator):
         return self.driver.find_element(By.XPATH, locator)
 
-    def wait_visible(self, element, timeout=10):
-        try:
-            return WebDriverWait(self.driver, timeout).until(
-                EC.presence_of_element_located((By.XPATH, element))
-            )
-        except Exception as e:
-            raise TimeoutError(f"Элемент {element} не появился на странице в течение {timeout} секунд")
-
     def action_click(self, element):
         self.wait_visible(element).click()
 
     def action_send_keys(self, element, key):
         self.wait_visible(element).send_keys(key)
+
+    def wait_visible(self, element, timeout=10):
+        try:
+            return WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located((By.XPATH, element))
+            )
+        except Exception:
+            raise TimeoutError(f"Элемент {element} не появился на странице в течение {timeout} секунд")
+
 
     def login_in_owa(self, login_label, login, password_label, password, enter_button):
         self.action_send_keys(login_label, login)

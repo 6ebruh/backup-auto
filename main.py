@@ -1,7 +1,9 @@
 import time
 from datetime import datetime
 from parser import parse_backup_table, format_markdown_table
-import config as cfg, Browser, page
+import config as cfg
+import Browser
+import page
 
 
 def display_employee_list():
